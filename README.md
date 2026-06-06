@@ -302,24 +302,6 @@ deterministic synthetic ETF-style prices so the demo remains usable offline.
 
 ---
 
-## Resume Bullet Points
-
-*Replace bracketed placeholders with your actual backtest numbers after running.*
-
-- **Accomplished** a risk-aware portfolio optimization framework with substantially improved risk-adjusted performance **as measured by** Sharpe ratio improvement, maximum drawdown reduction, and CVaR compliance across a 2019–2025 walk-forward backtest **by** formulating a CVXPY convex quadratic program incorporating linear transaction cost penalties, quadratic market impact modeling, Rockafellar-Uryasev CVaR constraints, volatility targeting, position limits, and turnover bounds on 8 diversified ETFs.
-
-- **Accomplished** a bias-free 7-year walk-forward backtest on 8 ETFs (SPY, QQQ, IWM, EFA, EEM, TLT, GLD, VNQ) **as measured by** ~80 strictly out-of-sample monthly rebalancings with passive weight drift and realistic transaction cost subtraction **by** building a modular Python backtesting engine using yfinance for data ingestion, Ledoit-Wolf shrinkage for covariance estimation, and EWM expected return forecasting — eliminating look-ahead bias by construction.
-
-- **Accomplished** a ~50–65% reduction in annual portfolio turnover vs. unconstrained mean-variance optimization **as measured by** estimated annual transaction cost savings of ~0.5–1.0% of portfolio value **by** implementing an L1-norm turnover constraint and a quadratic market-impact penalty in the CVXPY optimization objective, directly linking optimization decisions to their realized trading cost impact.
-
----
-
-## LinkedIn / GitHub Description
-
-Built a risk-aware portfolio optimizer in Python demonstrating the full quant finance workflow: ETF data download (yfinance) → Ledoit-Wolf covariance estimation → convex optimization (CVXPY + CLARABEL) with transaction cost penalties, CVaR tail-risk constraints, volatility targeting, and position/turnover limits → walk-forward backtesting with realistic cost simulation → 6 publication-quality visualizations comparing Risk-Aware, MVO, and equal-weight strategies across 7 years of multi-asset ETF data. Validated with 66 unit tests. Core finding: survival constraints are alpha — limiting drawdowns and turnover produces better risk-adjusted outcomes than chasing unconstrained expected returns.
-
----
-
 ## License
 
 MIT License. See [LICENSE](LICENSE).
