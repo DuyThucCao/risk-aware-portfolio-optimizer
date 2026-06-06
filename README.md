@@ -2,7 +2,7 @@
 
 > "Returns matter, but survival matters more."
 
-A production-style Python project for portfolio construction, risk management,
+A Python project for portfolio construction, risk management,
 and walk-forward backtesting. The optimizer extends classical mean-variance
 portfolio selection with transaction costs, turnover limits, position caps,
 sector caps, CVaR controls, volatility targeting, and benchmark comparison.
