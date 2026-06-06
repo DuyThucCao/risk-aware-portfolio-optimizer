@@ -300,8 +300,6 @@ deterministic synthetic ETF-style prices so the demo remains usable offline.
   covariance matrices", Journal of Multivariate Analysis, 2004.
 - Boyd et al., "Markowitz Portfolio Construction at Seventy", Stanford, 2024.
 
----
-
 ## License
 
 MIT License. See [LICENSE](LICENSE).
