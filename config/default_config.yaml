@@ -1,0 +1,141 @@
+# Risk-Aware Portfolio Optimizer - Default Configuration
+#
+# This file keeps the project reproducible. The same ETF universe, date range,
+# optimization assumptions, and reporting paths are shared by the command-line
+# runner, notebook, dashboard, tests, and project report.
+
+project:
+  name: "Risk-Aware Portfolio Optimizer"
+  tagline: "Returns matter, but survival and risk control matter more."
+  base_currency: "USD"
+  initial_portfolio_value: 100000.0
+
+data:
+  tickers:
+    - SPY
+    - QQQ
+    - IWM
+    - EFA
+    - EEM
+    - TLT
+    - GLD
+    - VNQ
+  start_date: "2018-01-01"
+  end_date: "2025-12-31"
+  price_field: "Close"
+  auto_adjust: true
+  use_cache: true
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  cache_dir: ".cache"
+  processed_prices_file: "data/processed/adjusted_close_prices.csv"
+  processed_returns_file: "data/processed/daily_returns.csv"
+  min_price_coverage: 0.95
+  fallback_to_synthetic: true
+  synthetic_seed: 42
+
+returns:
+  method: "simple"
+  periods_per_year: 252
+  risk_free_rate: 0.02
+
+expected_returns:
+  method: "historical"
+  lookback_days: 252
+  ewm_halflife: 63
+  annualize: true
+
+covariance:
+  estimator: "ledoit_wolf"
+  lookback_days: 252
+  ewm_halflife: 63
+  shrinkage_floor: 0.000001
+
+backtest:
+  start_after_days: 252
+  estimation_window: 252
+  rebalance_frequency: "M"
+  rebalance_frequency_days: 21
+  cvar_scenario_window: 252
+  benchmark_name: "Equal Weight"
+  include_cash: true
+
+strategies:
+  equal_weight:
+    enabled: true
+    name: "Equal Weight"
+    rebalance: true
+    max_weight: 1.0
+
+  mean_variance:
+    enabled: true
+    name: "Mean-Variance Optimization"
+    risk_aversion: 4.0
+    min_weight: 0.0
+    max_weight: 0.35
+    target_volatility: null
+    max_turnover: null
+    linear_transaction_cost: 0.0
+    quadratic_transaction_cost: 0.0
+    cvar_limit: null
+    drawdown_control:
+      enabled: false
+
+  risk_aware:
+    enabled: true
+    name: "Risk-Aware Optimizer"
+    risk_aversion: 5.0
+    min_weight: 0.0
+    max_weight: 0.25
+    max_turnover: 0.35
+    target_volatility: 0.12
+    max_leverage: 1.0
+    linear_transaction_cost: 0.0005
+    quadratic_transaction_cost: 0.01
+    cvar_alpha: 0.95
+    cvar_limit: 0.025
+    cash_return: 0.0
+    drawdown_control:
+      enabled: true
+      max_drawdown_threshold: -0.15
+      risk_off_scale: 0.60
+      recovery_threshold: -0.08
+    volatility_control:
+      enabled: true
+      target_volatility: 0.12
+      trailing_window: 63
+      min_scale: 0.25
+      max_scale: 1.0
+
+constraints:
+  long_only: true
+  fully_invested: true
+  allow_cash_buffer: true
+  min_cash_weight: 0.0
+  max_cash_weight: 0.75
+
+reporting:
+  images_dir: "images"
+  reports_dir: "reports"
+  metrics_file: "reports/performance_metrics.csv"
+  project_report_file: "reports/project_report.md"
+  chart_format: "png"
+  dpi: 150
+  save_charts: true
+  charts:
+    cumulative_returns: "images/cumulative_returns.png"
+    portfolio_weights: "images/portfolio_weights.png"
+    drawdowns: "images/drawdown.png"
+    volatility_comparison: "images/volatility_comparison.png"
+    risk_return: "images/risk_return_comparison.png"
+    turnover_costs: "images/turnover_transaction_costs.png"
+
+validation:
+  min_observations: 300
+  max_missing_fraction: 0.05
+  weight_sum_tolerance: 0.0001
+  min_assets: 3
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(levelname)s - %(name)s - %(message)s"

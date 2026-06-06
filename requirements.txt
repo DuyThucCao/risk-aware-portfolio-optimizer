@@ -1,0 +1,35 @@
+# Core data and numerics
+numpy>=1.24,<3.0
+pandas>=2.0,<3.0
+scipy>=1.11,<2.0
+
+# Market data
+yfinance>=0.2.36,<1.0
+
+# Optimization
+cvxpy>=1.4,<2.0
+clarabel>=0.6,<1.0
+
+# Risk models and statistical estimators
+scikit-learn>=1.3,<2.0
+
+# Visualization and reporting
+matplotlib>=3.7,<4.0
+seaborn>=0.12,<1.0
+plotly>=5.18,<6.0
+
+# Dashboard
+streamlit>=1.30,<2.0
+
+# Notebook workflow
+jupyter>=1.0,<2.0
+ipykernel>=6.25,<7.0
+nbformat>=5.9,<6.0
+
+# Configuration and progress bars
+PyYAML>=6.0,<7.0
+tqdm>=4.65,<5.0
+
+# Testing
+pytest>=7.4,<9.0
+pytest-cov>=4.1,<6.0
